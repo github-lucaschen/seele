@@ -1,0 +1,121 @@
+services:
+  seele-mysql:
+    container_name: seele-mysql
+    build:
+      context: ./mysql
+    image: seele-mysql:8.0.36
+    ports:
+      - "3306:3306"
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/my.cnf:/etc/mysql/my.cnf
+      - ./mysql/log:/var/log
+    command: --default-authentication-plugin=mysql_native_password
+      --lower_case_table_names=1
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_general_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: 'root-password'
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "mysql",
+          "-u",
+          "root",
+          "-proot-password",
+          "-e",
+          "select 1"
+        ]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+  seele-redis:
+    container_name: seele-redis
+    build:
+      context: ./redis
+    image: seele-redis:5.0.14
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis/data:/data
+      - ./redis/conf/redis.conf:/config/redis.conf
+      - ./redis/log:/var/log/redis
+    command: [ "redis-server", "/config/redis.conf" ]
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+  seele-nacos:
+    container_name: seele-nacos
+    build:
+      context: ./nacos
+    image: seele-nacos:v2.2.0-slim
+    depends_on:
+      seele-mysql:
+        condition: service_healthy
+      seele-redis:
+        condition: service_healthy
+    environment:
+      PREFER_HOST_MODE: ip
+      MODE: standalone
+      SPRING_DATASOURCE_PLATFORM: mysql
+      MYSQL_SERVICE_HOST: seele-mysql
+      MYSQL_SERVICE_DB_NAME: nacos_config
+      MYSQL_SERVICE_PORT: 3306
+      MYSQL_SERVICE_USER: nacos
+      MYSQL_SERVICE_PASSWORD: "nacos-password"
+      MYSQL_SERVICE_DB_PARAM: "characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true"
+    volumes:
+      - ./nacos/logs/:/home/nacos/logs
+    ports:
+      - "8848:8848"
+      - "9848:9848"
+      - "9555:9555"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "curl",
+          "-f",
+          "http://localhost:8848/nacos/v1/console/health/readiness"
+        ]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+  seele-gateway:
+    container_name: seele-gateway
+    build:
+      context: ./seele/gateway
+    image: seele-gateway:1.0.0
+    ports:
+      - "8080:8080"
+    depends_on:
+      seele-redis:
+        condition: service_healthy
+  seele-nginx:
+    container_name: seele-nginx
+    build:
+      context: ./nginx
+    image: seele-nginx:1.26
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/logs:/var/log/nginx
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/cert:/etc/nginx/cert
+    ports:
+      - "80:80"
+      - "443:443"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "curl",
+          "-f",
+          "http://localhost:80/"
+        ]
+      interval: 10s
+      timeout: 3s
+      retries: 5

@@ -1,0 +1,9 @@
+FROM openjdk:8-jre-slim
+
+MAINTAINER seele
+
+RUN mkdir -p /home/seele
+WORKDIR /home/seele
+COPY ./jar/seele-gateway.jar /home/seele/seele-gateway.jar
+
+ENTRYPOINT ["java","-jar","seele-gateway.jar"]

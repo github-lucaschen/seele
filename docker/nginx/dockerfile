@@ -1,0 +1,6 @@
+FROM nginx:1.26
+
+MAINTAINER seele
+
+RUN mkdir -p /home/seele/seele-ui
+COPY ./html /home/seele/seele-ui

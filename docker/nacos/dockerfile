@@ -1,0 +1,5 @@
+FROM nacos/nacos-server:v2.2.0-slim
+
+MAINTAINER seele
+
+RUN apt update && apt install -y curl
