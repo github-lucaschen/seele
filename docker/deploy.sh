@@ -10,8 +10,8 @@ run(){
   rm -rfv ./mysql/initdb/*.sql
   echo "cp:"
   cp -v ../sql/*.sql ./mysql/initdb
-#  docker-compose up --build -d seele-mysql seele-redis seele-nacos
-  docker-compose up --build -d seele-nginx
+#  docker-compose up --build -d seele-mysql seele-redis seele-nacos seele-nginx
+  docker-compose up --build -d seele-mysql seele-redis seele-nacos
 }
 
 stop(){

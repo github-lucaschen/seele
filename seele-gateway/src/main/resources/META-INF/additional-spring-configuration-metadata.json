@@ -1,0 +1,78 @@
+{
+  "properties": [
+    {
+      "name": "security.captcha.enabled",
+      "type": "java.lang.Boolean",
+      "defaultValue": false,
+      "sourceType": "com.skybeyondtech.gateway.config.properties.CaptchaProperties",
+      "description": "验证码开关"
+    },
+    {
+      "name": "security.captcha.type",
+      "type": "java.lang.String",
+      "defaultValue": "char",
+      "sourceType": "com.skybeyondtech.gateway.config.properties.CaptchaProperties",
+      "description": "验证码类型（math 数组计算 char 字符）"
+    },
+    {
+      "name": "security.ignore.whites",
+      "type": "java.util.List",
+      "sourceType": "com.skybeyondtech.gateway.config.properties.IgnoreWhiteProperties",
+      "description": "放行白名单配置，网关不校验此处的白名单"
+    },
+    {
+      "name": "security.xss.enabled",
+      "type": "java.lang.Boolean",
+      "defaultValue": true,
+      "sourceType": "com.skybeyondtech.gateway.config.properties.IgnoreWhiteProperties",
+      "description": "Xss开关"
+    },
+    {
+      "name": "security.xss.exclude-urls",
+      "type": "java.util.List",
+      "sourceType": "com.skybeyondtech.gateway.config.properties.XssProperties",
+      "description": "排除路径"
+    }
+  ],
+  "hints": [
+    {
+      "name": "security.captcha.enabled",
+      "values": [
+        {
+          "value": true,
+          "description": "开"
+        },
+        {
+          "value": false,
+          "description": "关"
+        }
+      ]
+    },
+    {
+      "name": "security.captcha.type",
+      "values": [
+        {
+          "value": "CHAR",
+          "description": "字符"
+        },
+        {
+          "value": "MATH",
+          "description": "数组计算"
+        }
+      ]
+    },
+    {
+      "name": "security.xss.enabled",
+      "values": [
+        {
+          "value": true,
+          "description": "开"
+        },
+        {
+          "value": false,
+          "description": "关"
+        }
+      ]
+    }
+  ]
+}

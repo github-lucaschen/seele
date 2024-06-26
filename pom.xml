@@ -6,7 +6,7 @@
 
     <groupId>com.skybeyondtech</groupId>
     <artifactId>seele</artifactId>
-    <version>${seele.version}</version>
+    <version>1.0.0</version>
 
     <name>seele</name>
     <url>https://www.skybeyondtech.com/seele</url>
@@ -22,6 +22,8 @@
         <spring-cloud-alibaba.version>2021.0.5.0</spring-cloud-alibaba.version>
         <spring-framework.version>5.3.33</spring-framework.version>
         <spring-boot-admin.version>2.7.15</spring-boot-admin.version>
+        <kaptcha.version>2.3.3</kaptcha.version>
+        <lombok.version>1.18.24</lombok.version>
         <jjwt.version>0.9.1</jjwt.version>
         <transmittable-thread-local.version>2.14.4</transmittable-thread-local.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
@@ -110,10 +112,36 @@
                 <artifactId>swagger-annotations</artifactId>
                 <version>${swagger-annotations.version}</version>
             </dependency>
+
+            <!-- 验证码 -->
+            <dependency>
+                <groupId>pro.fessional</groupId>
+                <artifactId>kaptcha</artifactId>
+                <version>${kaptcha.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.skybeyondtech</groupId>
+                <artifactId>seele-common-core</artifactId>
+                <version>${seele.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.skybeyondtech</groupId>
+                <artifactId>seele-common-redis</artifactId>
+                <version>${seele.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
     <modules>
+        <module>seele-gateway</module>
+        <module>seele-common</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -139,6 +167,7 @@
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
                         </path>
                         <path>
                             <groupId>org.mapstruct</groupId>
