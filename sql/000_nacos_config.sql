@@ -247,13 +247,16 @@ INSERT INTO roles (username, role)
 VALUES ('nacos', 'ROLE_ADMIN');
 
 /******************************************/
-/*   配置数据   */
+/*   创建命名空间   */
 /******************************************/
 
-INSERT INTO nacos_config.config_info (id, data_id, group_id, content, md5, gmt_create, gmt_modified,
-                                      src_user, src_ip, app_name, tenant_id, c_desc, c_use, effect,
-                                      type, c_schema, encrypted_data_key)
-VALUES (1, 'redis-dev.yml', 'DEFAULT_GROUP', 'spring:
+INSERT INTO nacos_config.tenant_info (id, kp, tenant_id, tenant_name, tenant_desc, create_source, gmt_create, gmt_modified) VALUES (1, '1', 'docker', 'docker', 'docker', 'nacos', 1719478173001, 1719478173001);
+
+/******************************************/
+/*   插入配置数据   */
+/******************************************/
+
+INSERT INTO nacos_config.config_info (id, data_id, group_id, content, md5, gmt_create, gmt_modified, src_user, src_ip, app_name, tenant_id, c_desc, c_use, effect, type, c_schema, encrypted_data_key) VALUES (1, 'redis-dev.yml', 'DEFAULT_GROUP', 'spring:
   redis:
     host: localhost
     port: 6379
@@ -263,12 +266,8 @@ VALUES (1, 'redis-dev.yml', 'DEFAULT_GROUP', 'spring:
       pool:
         max-active: 32
         max-idle: 16
-        min-idle: 8', '0312c9730ef0d8e9bb7e5eff5dbfc834', '2024-06-26 11:57:06',
-        '2024-06-26 11:57:06', null, '192.168.65.1', '', '', null, null, null, 'yaml', null, '');
-INSERT INTO nacos_config.config_info (id, data_id, group_id, content, md5, gmt_create, gmt_modified,
-                                      src_user, src_ip, app_name, tenant_id, c_desc, c_use, effect,
-                                      type, c_schema, encrypted_data_key)
-VALUES (3, 'database-dev.yml', 'DEFAULT_GROUP', 'spring:
+        min-idle: 8', '0312c9730ef0d8e9bb7e5eff5dbfc834', '2024-06-26 11:57:06', '2024-06-27 16:50:16', 'nacos', '192.168.65.1', '', '', '', '', '', 'yaml', '', '');
+INSERT INTO nacos_config.config_info (id, data_id, group_id, content, md5, gmt_create, gmt_modified, src_user, src_ip, app_name, tenant_id, c_desc, c_use, effect, type, c_schema, encrypted_data_key) VALUES (3, 'database-dev.yml', 'DEFAULT_GROUP', 'spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/seele?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
@@ -282,13 +281,8 @@ VALUES (3, 'database-dev.yml', 'DEFAULT_GROUP', 'spring:
 logging:
   level:
     org.hibernate.SQL: debug
-    org.hibernate.type.descriptor.sql.BasicBinder: trace', '2cb5f394e4d171fad6e54285902b46f0',
-        '2024-06-26 19:16:15', '2024-06-27 14:55:54', 'nacos', '192.168.65.1', '', '', '', '', '',
-        'yaml', '', '');
-INSERT INTO nacos_config.config_info (id, data_id, group_id, content, md5, gmt_create, gmt_modified,
-                                      src_user, src_ip, app_name, tenant_id, c_desc, c_use, effect,
-                                      type, c_schema, encrypted_data_key)
-VALUES (4, 'seele-gateway-dev.yml', 'DEFAULT_GROUP', 'spring:
+    org.hibernate.type.descriptor.sql.BasicBinder: trace', '2cb5f394e4d171fad6e54285902b46f0', '2024-06-26 19:16:15', '2024-06-27 16:50:04', 'nacos', '192.168.65.1', '', '', '', '', '', 'yaml', '', '');
+INSERT INTO nacos_config.config_info (id, data_id, group_id, content, md5, gmt_create, gmt_modified, src_user, src_ip, app_name, tenant_id, c_desc, c_use, effect, type, c_schema, encrypted_data_key) VALUES (4, 'seele-gateway-dev.yml', 'DEFAULT_GROUP', 'spring:
   cloud:
     gateway:
       discovery:
@@ -304,6 +298,47 @@ logging:
   level:
     org.springframework.cloud.gateway: trace
     org.springframework.cloud.loadbalancer: trace
-    org.springframework.web.reactive: trace', '0206bd93b6a442462a5566c9d761e371',
-        '2024-06-26 19:18:20', '2024-06-26 19:18:20', null, '192.168.65.1', '', '', null, null,
-        null, 'yaml', null, '');
+    org.springframework.web.reactive: trace', '0206bd93b6a442462a5566c9d761e371', '2024-06-26 19:18:20', '2024-06-26 19:18:20', null, '192.168.65.1', '', '', null, null, null, 'yaml', null, '');
+INSERT INTO nacos_config.config_info (id, data_id, group_id, content, md5, gmt_create, gmt_modified, src_user, src_ip, app_name, tenant_id, c_desc, c_use, effect, type, c_schema, encrypted_data_key) VALUES (6, 'redis-dev.yml', 'DEFAULT_GROUP', 'spring:
+  redis:
+    host: seele-redis
+    port: 6379
+    password: redis-password
+    database: 0
+    lettuce:
+      pool:
+        max-active: 32
+        max-idle: 16
+        min-idle: 8', 'bb2cf6af4d80ea7cdd753269f12cf455', '2024-06-27 16:49:45', '2024-06-27 16:49:45', null, '192.168.65.1', '', 'docker', null, null, null, 'yaml', null, '');
+INSERT INTO nacos_config.config_info (id, data_id, group_id, content, md5, gmt_create, gmt_modified, src_user, src_ip, app_name, tenant_id, c_desc, c_use, effect, type, c_schema, encrypted_data_key) VALUES (7, 'database-dev.yml', 'DEFAULT_GROUP', 'spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://seele-mysql:3306/seele?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
+    username: seele
+    password: seele-password
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type.descriptor.sql.BasicBinder: trace', '68713883aa432921efc046f6c3324687', '2024-06-27 16:49:45', '2024-06-27 16:49:45', null, '192.168.65.1', '', 'docker', '', null, null, 'yaml', null, '');
+INSERT INTO nacos_config.config_info (id, data_id, group_id, content, md5, gmt_create, gmt_modified, src_user, src_ip, app_name, tenant_id, c_desc, c_use, effect, type, c_schema, encrypted_data_key) VALUES (8, 'seele-gateway-dev.yml', 'DEFAULT_GROUP', 'spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: seele-base
+          uri: lb://seele-base
+          predicates:
+            - Path=/base/**
+
+logging:
+  level:
+    org.springframework.cloud.gateway: trace
+    org.springframework.cloud.loadbalancer: trace
+    org.springframework.web.reactive: trace', '0206bd93b6a442462a5566c9d761e371', '2024-06-27 16:49:45', '2024-06-27 16:49:45', null, '192.168.65.1', '', 'docker', null, null, null, 'yaml', null, '');

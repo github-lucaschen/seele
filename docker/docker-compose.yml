@@ -93,8 +93,18 @@ services:
     ports:
       - "8080:8080"
     depends_on:
+      seele-nacos:
+        condition: service_healthy
       seele-redis:
         condition: service_healthy
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "curl",
+          "-f",
+          "http://localhost:8080/actuator/health"
+        ]
   seele-nginx:
     container_name: seele-nginx
     build:
@@ -108,6 +118,9 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    depends_on:
+      seele-gateway:
+        condition: service_healthy
     healthcheck:
       test:
         [
@@ -119,3 +132,21 @@ services:
       interval: 10s
       timeout: 3s
       retries: 5
+  seele-base:
+    container_name: seele-base
+    build:
+      context: ./seele/service/base
+    image: seele-base:1.0.0
+    ports:
+      - "18080:18080"
+    depends_on:
+      seele-nacos:
+        condition: service_healthy
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "curl",
+          "-f",
+          "http://localhost:18080/base/actuator/health"
+        ]

@@ -12,3 +12,5 @@ rm -rfv ./nacos/logs
 echo "clean nginx: "
 rm -rfv ./nginx/logs
 rm -rfv ./nginx/html/*
+echo "clean seele:"
+find "./seele" -type f -name "*.jar" -exec rm -fv {} \;

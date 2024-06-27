@@ -1,0 +1,19 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: seele-gateway
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: seele-nacos:8848
+        namespace: docker
+      config:
+        server-addr: seele-nacos:8848
+        namespace: docker
+        file-extension: yml
+        shared-configs:
+          - redis-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}

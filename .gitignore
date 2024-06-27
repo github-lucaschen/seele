@@ -55,3 +55,4 @@ build/
 /docker/nginx/cert/*
 /docker/nginx/logs
 /docker/nginx/html/*
+/docker/seele/**/jar/*.jar
