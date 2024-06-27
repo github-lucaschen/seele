@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.skybeyondtech</groupId>
+        <artifactId>seele-base</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>seele-base-service</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.skybeyondtech</groupId>
+            <artifactId>seele-common-log</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.skybeyondtech</groupId>
+            <artifactId>seele-base-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.skybeyondtech</groupId>
+            <artifactId>seele-common-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.skybeyondtech</groupId>
+            <artifactId>seele-common-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.skybeyondtech</groupId>
+            <artifactId>seele-common-web</artifactId>
+        </dependency>
+    </dependencies>
+</project>

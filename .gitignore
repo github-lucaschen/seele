@@ -45,7 +45,7 @@ build/
 !*/build/*.java
 !*/build/*.html
 !*/build/*.xml
-
+/logs
 /docker/mysql/data/
 /docker/mysql/initdb/*.sql
 /docker/mysql/log/

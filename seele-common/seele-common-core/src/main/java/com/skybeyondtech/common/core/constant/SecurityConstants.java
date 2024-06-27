@@ -15,6 +15,11 @@ public final class SecurityConstants {
     public static final String DETAILS_USERNAME = "username";
 
     /**
+     * 客户端名称
+     */
+    public static final String DETAILS_CLIENT_CODE = "client_code";
+
+    /**
      * 授权信息字段
      */
     public static final String AUTHORIZATION_HEADER = "authorization";

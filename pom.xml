@@ -23,10 +23,15 @@
         <spring-framework.version>5.3.33</spring-framework.version>
         <spring-boot-admin.version>2.7.15</spring-boot-admin.version>
         <kaptcha.version>2.3.3</kaptcha.version>
-        <lombok.version>1.18.24</lombok.version>
         <jjwt.version>0.9.1</jjwt.version>
         <transmittable-thread-local.version>2.14.4</transmittable-thread-local.version>
+        <guava.version>32.1.3-jre</guava.version>
+        <vavr.version>0.10.4</vavr.version>
+        <lombok.version>1.18.24</lombok.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
+        <junit-jupiter.version>5.8.2</junit-jupiter.version>
+        <mockito.version>4.11.0</mockito.version>
+        <assertj-core.version>3.12.2</assertj-core.version>
         <doc.version>4.4.0</doc.version>
         <swagger-annotations.version>2.2.9</swagger-annotations.version>
     </properties>
@@ -86,6 +91,11 @@
 
             <!-- 对象属性拷贝 -->
             <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.mapstruct</groupId>
                 <artifactId>mapstruct</artifactId>
                 <version>${mapstruct.version}</version>
@@ -121,9 +131,41 @@
             </dependency>
 
             <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>${lombok.version}</version>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.vavr</groupId>
+                <artifactId>vavr</artifactId>
+                <version>${vavr.version}</version>
+            </dependency>
+
+            <!-- Test -->
+            <dependency>
+                <groupId>org.junit</groupId>
+                <artifactId>junit-bom</artifactId>
+                <version>${junit-jupiter.version}</version>
+                <type>pom</type>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>${mockito.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-junit-jupiter</artifactId>
+                <version>${mockito.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-inline</artifactId>
+                <version>${mockito.version}</version>
+                <scope>test</scope>
             </dependency>
 
             <dependency>
@@ -136,12 +178,33 @@
                 <artifactId>seele-common-redis</artifactId>
                 <version>${seele.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.skybeyondtech</groupId>
+                <artifactId>seele-common-jpa</artifactId>
+                <version>${seele.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.skybeyondtech</groupId>
+                <artifactId>seele-common-log</artifactId>
+                <version>${seele.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.skybeyondtech</groupId>
+                <artifactId>seele-common-web</artifactId>
+                <version>${seele.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.skybeyondtech</groupId>
+                <artifactId>seele-base-api</artifactId>
+                <version>${seele.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
     <modules>
         <module>seele-gateway</module>
         <module>seele-common</module>
+        <module>seele-service</module>
     </modules>
     <packaging>pom</packaging>
 

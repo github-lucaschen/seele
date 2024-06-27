@@ -2,6 +2,8 @@
 
 port(){
 	firewall-cmd --add-port=80/tcp --permanent
+	firewall-cmd --add-port=8080/tcp --permanent
+	firewall-cmd --add-port=18080/tcp --permanent
 	service firewalld restart
 }
 

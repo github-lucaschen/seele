@@ -14,5 +14,4 @@ spring:
         server-addr: 127.0.0.1:8848
         file-extension: yml
         shared-configs:
-          - gateway-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
           - redis-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}

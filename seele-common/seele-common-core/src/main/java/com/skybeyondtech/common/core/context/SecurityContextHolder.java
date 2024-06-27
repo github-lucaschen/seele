@@ -59,6 +59,14 @@ public class SecurityContextHolder {
         set(SecurityConstants.DETAILS_USERNAME, username);
     }
 
+    public static String getClientCode() {
+        return get(SecurityConstants.DETAILS_CLIENT_CODE);
+    }
+
+    public static void setClientCode(final String clientCode) {
+        set(SecurityConstants.DETAILS_CLIENT_CODE, clientCode);
+    }
+
     public static String getUserKey() {
         return get(SecurityConstants.USER_KEY);
     }

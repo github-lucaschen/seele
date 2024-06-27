@@ -1,0 +1,3 @@
+com.skybeyondtech.common.web.config.GlobalWebConfig
+com.skybeyondtech.common.web.feign.FeignSupportConfig
+com.skybeyondtech.common.web.sentine.SentinelUrlBlockHandler

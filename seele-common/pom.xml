@@ -12,6 +12,9 @@
     <modules>
         <module>seele-common-core</module>
         <module>seele-common-redis</module>
+        <module>seele-common-log</module>
+        <module>seele-common-jpa</module>
+        <module>seele-common-web</module>
     </modules>
 
     <artifactId>seele-common</artifactId>

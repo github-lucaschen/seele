@@ -245,3 +245,65 @@ VALUES ('nacos', '$2a$10$EuWPZHzz32dJN7jexM34MOeYirDdFAZm2kuWj7VEOJhhZkDrxfvUu',
 
 INSERT INTO roles (username, role)
 VALUES ('nacos', 'ROLE_ADMIN');
+
+/******************************************/
+/*   配置数据   */
+/******************************************/
+
+INSERT INTO nacos_config.config_info (id, data_id, group_id, content, md5, gmt_create, gmt_modified,
+                                      src_user, src_ip, app_name, tenant_id, c_desc, c_use, effect,
+                                      type, c_schema, encrypted_data_key)
+VALUES (1, 'redis-dev.yml', 'DEFAULT_GROUP', 'spring:
+  redis:
+    host: localhost
+    port: 6379
+    password: redis-password
+    database: 0
+    lettuce:
+      pool:
+        max-active: 32
+        max-idle: 16
+        min-idle: 8', '0312c9730ef0d8e9bb7e5eff5dbfc834', '2024-06-26 11:57:06',
+        '2024-06-26 11:57:06', null, '192.168.65.1', '', '', null, null, null, 'yaml', null, '');
+INSERT INTO nacos_config.config_info (id, data_id, group_id, content, md5, gmt_create, gmt_modified,
+                                      src_user, src_ip, app_name, tenant_id, c_desc, c_use, effect,
+                                      type, c_schema, encrypted_data_key)
+VALUES (3, 'database-dev.yml', 'DEFAULT_GROUP', 'spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/seele?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
+    username: seele
+    password: seele-password
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type.descriptor.sql.BasicBinder: trace', '2cb5f394e4d171fad6e54285902b46f0',
+        '2024-06-26 19:16:15', '2024-06-27 14:55:54', 'nacos', '192.168.65.1', '', '', '', '', '',
+        'yaml', '', '');
+INSERT INTO nacos_config.config_info (id, data_id, group_id, content, md5, gmt_create, gmt_modified,
+                                      src_user, src_ip, app_name, tenant_id, c_desc, c_use, effect,
+                                      type, c_schema, encrypted_data_key)
+VALUES (4, 'seele-gateway-dev.yml', 'DEFAULT_GROUP', 'spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: seele-base
+          uri: lb://seele-base
+          predicates:
+            - Path=/base/**
+
+logging:
+  level:
+    org.springframework.cloud.gateway: trace
+    org.springframework.cloud.loadbalancer: trace
+    org.springframework.web.reactive: trace', '0206bd93b6a442462a5566c9d761e371',
+        '2024-06-26 19:18:20', '2024-06-26 19:18:20', null, '192.168.65.1', '', '', null, null,
+        null, 'yaml', null, '');
