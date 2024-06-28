@@ -198,6 +198,11 @@
                 <artifactId>seele-base-api</artifactId>
                 <version>${seele.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.skybeyondtech</groupId>
+                <artifactId>seele-oum-api</artifactId>
+                <version>${seele.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

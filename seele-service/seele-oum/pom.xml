@@ -5,24 +5,16 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.skybeyondtech</groupId>
-        <artifactId>seele</artifactId>
+        <artifactId>seele-service</artifactId>
         <version>1.0.0</version>
     </parent>
 
+    <artifactId>seele-oum</artifactId>
+
     <modules>
-        <module>seele-common-core</module>
-        <module>seele-common-redis</module>
-        <module>seele-common-log</module>
-        <module>seele-common-jpa</module>
-        <module>seele-common-web</module>
-        <module>seele-common-security</module>
+        <module>seele-oum-api</module>
+        <module>seele-oum-service</module>
     </modules>
 
-    <artifactId>seele-common</artifactId>
     <packaging>pom</packaging>
-
-    <description>
-        Seele-Common 通用模块
-    </description>
-
 </project>

@@ -11,6 +11,7 @@
 
     <modules>
         <module>seele-base</module>
+        <module>seele-oum</module>
     </modules>
 
     <artifactId>seele-service</artifactId>
