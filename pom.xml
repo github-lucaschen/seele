@@ -195,6 +195,11 @@
             </dependency>
             <dependency>
                 <groupId>com.skybeyondtech</groupId>
+                <artifactId>seele-common-security</artifactId>
+                <version>${seele.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.skybeyondtech</groupId>
                 <artifactId>seele-base-api</artifactId>
                 <version>${seele.version}</version>
             </dependency>
@@ -210,6 +215,7 @@
         <module>seele-gateway</module>
         <module>seele-common</module>
         <module>seele-service</module>
+        <module>seele-auth</module>
     </modules>
     <packaging>pom</packaging>
 
