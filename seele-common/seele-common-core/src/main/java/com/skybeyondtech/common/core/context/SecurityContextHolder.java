@@ -43,6 +43,11 @@ public class SecurityContextHolder {
         return map.getOrDefault(key, StringUtils.EMPTY).toString();
     }
 
+    public static <T> T get(String key, Class<T> clazz) {
+        final Map<String, Object> map = getLocalMap();
+        return (T) map.getOrDefault(key, null);
+    }
+
     public static Long getUserId() {
         return NumberUtils.toLong(get(SecurityConstants.DETAILS_USER_ID), 0L);
     }
@@ -51,20 +56,12 @@ public class SecurityContextHolder {
         set(SecurityConstants.DETAILS_USER_ID, account);
     }
 
-    public static String getUserName() {
-        return get(SecurityConstants.DETAILS_USERNAME);
+    public static String getUserCode() {
+        return get(SecurityConstants.DETAILS_USER_CODE);
     }
 
-    public static void setUserName(final String username) {
-        set(SecurityConstants.DETAILS_USERNAME, username);
-    }
-
-    public static String getClientCode() {
-        return get(SecurityConstants.DETAILS_CLIENT_CODE);
-    }
-
-    public static void setClientCode(final String clientCode) {
-        set(SecurityConstants.DETAILS_CLIENT_CODE, clientCode);
+    public static void setUserCode(final String username) {
+        set(SecurityConstants.DETAILS_USER_CODE, username);
     }
 
     public static String getUserKey() {
@@ -73,6 +70,14 @@ public class SecurityContextHolder {
 
     public static void setUserKey(final String userKey) {
         set(SecurityConstants.USER_KEY, userKey);
+    }
+
+    public static String getClientCode() {
+        return get(SecurityConstants.DETAILS_CLIENT_CODE);
+    }
+
+    public static void setClientCode(final String clientCode) {
+        set(SecurityConstants.DETAILS_CLIENT_CODE, clientCode);
     }
 
     public static String getPermission() {

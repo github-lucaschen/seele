@@ -1,35 +1,42 @@
 package com.skybeyondtech.common.web.feign;
 
-import com.skybeyondtech.common.core.context.HeaderCode;
+import com.skybeyondtech.common.core.constant.SecurityConstants;
+import com.skybeyondtech.common.core.util.ServletUtils;
+import com.skybeyondtech.common.core.util.ip.IpUtils;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
-import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 import java.util.Objects;
 
 public class FeignBasicAuthRequestInterceptor implements RequestInterceptor {
     @Override
     public void apply(final RequestTemplate requestTemplate) {
-        final ServletRequestAttributes attributes =
-                (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        if (Objects.nonNull(attributes)) {
-            // 设置 Feign 请求标识
-            requestTemplate.header(HeaderCode.FEIGN, BooleanUtils.TRUE);
-            final String token = attributes.getRequest().getHeader(HeaderCode.TOKEN);
-            if (StringUtils.isNoneBlank(token)) {
-                requestTemplate.header(HeaderCode.TOKEN, token);
+
+        final HttpServletRequest httpServletRequest = ServletUtils.getRequest();
+        if (Objects.nonNull(httpServletRequest)) {
+            final Map<String, String> headers = ServletUtils.getHeaders(httpServletRequest);
+            // 传递用户信息请求头，防止丢失
+            String userId = headers.get(SecurityConstants.DETAILS_USER_ID);
+            if (StringUtils.isNotEmpty(userId)) {
+                requestTemplate.header(SecurityConstants.DETAILS_USER_ID, userId);
             }
-            final String sourceType = attributes.getRequest().getHeader(HeaderCode.SOURCE_TYPE);
-            if (StringUtils.isNoneBlank(sourceType)) {
-                requestTemplate.header(HeaderCode.SOURCE_TYPE, sourceType);
+            String userKey = headers.get(SecurityConstants.USER_KEY);
+            if (StringUtils.isNotEmpty(userKey)) {
+                requestTemplate.header(SecurityConstants.USER_KEY, userKey);
             }
-            final String userAgent = attributes.getRequest().getHeader(HeaderCode.USER_AGENT);
-            if (StringUtils.isNoneBlank(userAgent)) {
-                requestTemplate.header(HeaderCode.USER_AGENT, userAgent);
+            String userCode = headers.get(SecurityConstants.DETAILS_USER_CODE);
+            if (StringUtils.isNotEmpty(userCode)) {
+                requestTemplate.header(SecurityConstants.DETAILS_USER_CODE, userCode);
             }
+            String authentication = headers.get(SecurityConstants.AUTHORIZATION_HEADER);
+            if (StringUtils.isNotEmpty(authentication)) {
+                requestTemplate.header(SecurityConstants.AUTHORIZATION_HEADER, authentication);
+            }
+            // 配置客户端IP
+            requestTemplate.header("X-Forwarded-For", IpUtils.getIpAddr());
         }
     }
 }

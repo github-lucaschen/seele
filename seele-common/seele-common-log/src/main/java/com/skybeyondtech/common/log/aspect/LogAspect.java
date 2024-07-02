@@ -2,7 +2,7 @@ package com.skybeyondtech.common.log.aspect;
 
 import com.skybeyondtech.base.client.OperationLogClient;
 import com.skybeyondtech.base.domain.dto.OperationLogDTO;
-import com.skybeyondtech.common.core.context.HeaderCode;
+import com.skybeyondtech.common.core.constant.SecurityConstants;
 import com.skybeyondtech.common.core.context.SecurityContextHolder;
 import com.skybeyondtech.common.core.util.JsonUtils;
 import com.skybeyondtech.common.core.util.ip.IpUtils;
@@ -108,7 +108,7 @@ public class LogAspect {
                                 , ERROR_LENGTH) : StringUtils.EMPTY;
 
         final OperationLogDTO operationLogDTO = OperationLogDTO.builder()
-                .userCode(StringUtils.defaultIfBlank(SecurityContextHolder.getUserName(), "UNKNOWN"))
+                .userCode(StringUtils.defaultIfBlank(SecurityContextHolder.getUserCode(), "UNKNOWN"))
                 .clientCode(StringUtils.defaultIfBlank(SecurityContextHolder.getClientCode(), "PC"))
                 .description(annotationLog.description())
                 .logType(annotationLog.logType().getCode())
@@ -118,7 +118,7 @@ public class LogAspect {
                 .ip(IpUtils.getIpAddr())
                 .url(request.getRequestURI())
                 .httpMethod(request.getMethod())
-                .userAgent(StringUtils.substringBefore(request.getHeader(HeaderCode.USER_AGENT),
+                .userAgent(StringUtils.substringBefore(request.getHeader(SecurityConstants.USER_AGENT),
                         REQUEST_LENGTH))
                 .parameter(StringUtils.substringBefore(parameters, REQUEST_LENGTH))
                 .requestTime(this.stopWatch.getTime())

@@ -1,6 +1,8 @@
 package com.skybeyondtech.common.web.advice;
 
 import com.skybeyondtech.common.core.domain.R;
+import com.skybeyondtech.common.core.exception.NotPermissionException;
+import com.skybeyondtech.common.core.exception.NotRoleException;
 import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -44,7 +46,7 @@ public class ExceptionControllerAdvice {
                 request.getRequestURL(),
                 response.getStatus(),
                 exception);
-        return R.fail("[WEB] 502 FEIGN_EXCEPTION");
+        return R.fail("[WEB] 502 Feign 错误");
     }
 
     /**
@@ -56,7 +58,7 @@ public class ExceptionControllerAdvice {
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public R handlerHttpRequestMethodNotSupportedException(Exception exception) {
         log.error("HttpRequestMethodNotSupportedException: {}", exception.getMessage(), exception);
-        return R.fail("[WEB] 5000 HTTP_REQUEST_METHOD_NOT_SUPPORTED_EXCEPTION");
+        return R.fail("[WEB] 5000 请求方式错误");
     }
 
     /**
@@ -68,7 +70,25 @@ public class ExceptionControllerAdvice {
     @ExceptionHandler(MissingServletRequestParameterException.class)
     public R handleException(final MissingServletRequestParameterException exception) {
         log.error("MissingServletRequestParameterException: {}", exception.getMessage(), exception);
-        return R.fail("[WEB] 501 MISSING_SERVLET_REQUEST_PARAMETER_EXCEPTION");
+        return R.fail("[WEB] 501 未知参数异常");
+    }
+
+    /**
+     * 权限码异常
+     */
+    @ExceptionHandler(NotPermissionException.class)
+    public R handleNotPermissionException(final NotPermissionException exception) {
+        log.error("NotPermissionException: {}'", exception.getMessage(), exception);
+        return R.fail("[AUTH] 403 没有访问权限，请联系管理员授权");
+    }
+
+    /**
+     * 权限码异常
+     */
+    @ExceptionHandler(NotRoleException.class)
+    public R handleNotRoleException(final NotRoleException exception) {
+        log.error("NotRoleException: {}'", exception.getMessage(), exception);
+        return R.fail("[AUTH] 403 没有访问权限，请联系管理员授权");
     }
 
     /**
