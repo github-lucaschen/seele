@@ -1,0 +1,22 @@
+server:
+  port: 18081
+  servlet:
+    context-path: /oum
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: seele-oum
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: seele.service.skybeyondtech.com:8848
+      config:
+        server-addr: seele.service.skybeyondtech.com:8848
+        file-extension: yml
+        shared-configs:
+          - redis-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+          - database-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}

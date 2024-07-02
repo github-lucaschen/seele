@@ -2,9 +2,6 @@ package com.skybeyondtech.base.domain.vo;
 
 
 import com.skybeyondtech.common.jpa.domain.vo.VO;
-import com.skybeyondtech.base.enums.LogTypeEnum;
-import com.skybeyondtech.base.enums.OperationTypeEnum;
-import com.skybeyondtech.base.enums.ResultTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.NoArgsConstructor;

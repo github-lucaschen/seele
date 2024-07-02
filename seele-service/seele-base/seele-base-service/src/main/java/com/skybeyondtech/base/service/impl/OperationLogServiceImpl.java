@@ -3,9 +3,6 @@ package com.skybeyondtech.base.service.impl;
 import com.google.common.collect.Lists;
 import com.skybeyondtech.base.domain.dto.OperationLogDTO;
 import com.skybeyondtech.base.domain.po.OperationLogPO;
-import com.skybeyondtech.base.enums.LogTypeEnum;
-import com.skybeyondtech.base.enums.OperationTypeEnum;
-import com.skybeyondtech.base.enums.ResultTypeEnum;
 import com.skybeyondtech.base.repository.OperationLogRepository;
 import com.skybeyondtech.base.service.OperationLogService;
 import com.skybeyondtech.common.jpa.repository.Repository;
@@ -14,8 +11,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -32,14 +27,6 @@ import java.util.Objects;
 public class OperationLogServiceImpl extends ServiceImpl<OperationLogPO, Long> implements OperationLogService {
 
     private final OperationLogRepository operationLogRepository;
-
-    private OperationLogService operationLogService;
-
-    @Lazy
-    @Autowired
-    public void setOperationLogService(final OperationLogService operationLogService) {
-        this.operationLogService = operationLogService;
-    }
 
     @Override
     public Repository<OperationLogPO, Long> repository() {
@@ -96,6 +83,6 @@ public class OperationLogServiceImpl extends ServiceImpl<OperationLogPO, Long> i
             }
             return null;
         };
-        return operationLogService.findAll(specification, pageable);
+        return operationLogRepository.findAll(specification, pageable);
     }
 }

@@ -258,7 +258,7 @@ INSERT INTO nacos_config.tenant_info (id, kp, tenant_id, tenant_name, tenant_des
 
 INSERT INTO nacos_config.config_info (id, data_id, group_id, content, md5, gmt_create, gmt_modified, src_user, src_ip, app_name, tenant_id, c_desc, c_use, effect, type, c_schema, encrypted_data_key) VALUES (1, 'redis-dev.yml', 'DEFAULT_GROUP', 'spring:
   redis:
-    host: localhost
+    host: seele.service.skybeyondtech.com
     port: 6379
     password: redis-password
     database: 0
@@ -270,7 +270,7 @@ INSERT INTO nacos_config.config_info (id, data_id, group_id, content, md5, gmt_c
 INSERT INTO nacos_config.config_info (id, data_id, group_id, content, md5, gmt_create, gmt_modified, src_user, src_ip, app_name, tenant_id, c_desc, c_use, effect, type, c_schema, encrypted_data_key) VALUES (3, 'database-dev.yml', 'DEFAULT_GROUP', 'spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/seele?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://seele.service.skybeyondtech.com:3306/seele?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
     username: seele
     password: seele-password
 
